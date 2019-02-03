@@ -4,7 +4,7 @@ const tag = '[ResultView]'
 
 const ResultView = Object.create(View)
 
-ResultView.messages = {
+ResultView.message = {
   NO_RESULT: '검색 결과가 없습니다'
 }
 
@@ -14,7 +14,7 @@ ResultView.setup = function (el) {
 
 ResultView.render = function (data = []) {
   console.log(tag, 'render()', data)
-  this.el.innerHTML = data.length ? this.getSearchResultsHtml(data) : this.messages.NO_RESULT
+  this.el.innerHTML = data.length ? this.getSearchResultsHtml(data) : this.message.NO_RESULT
   this.show()
 }
 
@@ -27,7 +27,7 @@ ResultView.getSearchResultsHtml = function (data) {
 
 ResultView.getSearchItemHtml = function (item) {
   return `<li>
-    <img src="${item.image}" />
+    <img src = "${item.image}">
     <p>${item.name}</p>
   </li>`
 }

@@ -10,32 +10,37 @@ KeywordView.messages = {
 
 KeywordView.setup = function (el) {
   this.init(el)
+  this.inputEl = el.querySelector('[type=text]')
   return this
 }
 
 KeywordView.render = function (data = []) {
   this.el.innerHTML = data.length ? this.getKeywordsHtml(data) : this.messages.NO_KEYWORDS
-  this.show()
   this.bindClickEvent()
+  this.show()
   return this
 }
 
 KeywordView.getKeywordsHtml = function (data) {
   return data.reduce((html, item, index) => {
-    html += `<li data-keyword="${item.keyword}"><span class="number">${index + 1}</span>${item.keyword}</li>`
+    html += `<li data-keyword="${item.keyword}">
+      <span class="number">${index + 1}</span>
+      ${item.keyword}
+    </li>`
+
     return html
-  }, '<ul class="list">') + "</ul>"
+  }, '<ul class="list">') + '</ul>'
 }
 
-KeywordView.bindClickEvent = function() {
+KeywordView.bindClickEvent = function () {
   Array.from(this.el.querySelectorAll('li')).forEach(li => {
     li.addEventListener('click', e => this.onClickKeyword(e))
   })
 }
 
 KeywordView.onClickKeyword = function (e) {
-  const {keyword} = e.currentTarget.dataset
-  this.emit('@click', {keyword})
+  const { keyword } = e.currentTarget.dataset
+  this.emit('@click', { keyword })
 }
 
 export default KeywordView
