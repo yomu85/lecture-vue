@@ -2,6 +2,9 @@ import HistoryModel from './models/HistoryModel.js'
 import KeywordModel from './models/KeywordModel.js'
 import SearchModel from './models/SearchModel.js'
 
+import FormComponent from './components/FormComponent.js'
+import ResultComponent from './components/ResultComponent.js'
+
 new Vue({
     el: '#app',
     data: {
@@ -13,19 +16,19 @@ new Vue({
         history: [],
         searchResult: []
     },
+    components: {
+        'search-form': FormComponent,
+        'search-result': ResultComponent
+    },
     created() {
         this.selectedTab = this.tabs[1]
         this.fetchKeyword()
         this.fetchHistory()
     },
     methods: {
-        onSubmit(e) {
-            //console.log(e)
+        onSubmit(query) {
+            this.query = query
             this.search()
-        },
-        onKeyup(e) {
-            //console.log(e)
-            if (!this.query.length) this.onReset()
         },
         onReset(e) {
             //console.log(e)
